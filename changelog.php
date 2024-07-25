@@ -44,6 +44,12 @@
 
     <!-- Changelog Content -->
     <div class="container">
+    <div class="changelog-section">
+            <h3>Version 0.4a <small class="text-muted">- 25 juillet 2024</small></h3>
+            <ul>
+                <li>Révision de la nomeclature en base de donnée</li>
+            </ul>
+        </div>
         <div class="changelog-section">
             <h3>Version 0.3a <small class="text-muted">- 22 juillet 2024</small></h3>
             <ul>
