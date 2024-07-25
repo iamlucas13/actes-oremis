@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Récupérer les catégories pour le formulaire
-$categories_result = $conn->query("SELECT * FROM categories");
+$categories_result = $conn->query("SELECT * FROM category");
 $act_types_result = $conn->query("SELECT * FROM act_types");
 $instance_type_result = $conn->query("SELECT * FROM instance_type");
 ?>

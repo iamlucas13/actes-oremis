@@ -14,7 +14,7 @@ $stmt->execute();
 $document = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Récupérer les catégories pour le formulaire
-$categories_stmt = $conn->prepare("SELECT * FROM categories");
+$categories_stmt = $conn->prepare("SELECT * FROM category");
 $categories_stmt->execute();
 $categories_result = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
 

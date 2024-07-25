@@ -14,9 +14,9 @@ if (isset($_SESSION['user_id'])) {
     $user_role = '';
 }
 
-$sql = "SELECT documents.*, categories.name AS category_name, act_types.name AS act_type, instance_type.name AS instance_type 
+$sql = "SELECT documents.*, category.name AS category_name, act_types.name AS act_type, instance_type.name AS instance_type 
         FROM documents 
-        LEFT JOIN categories ON documents.category_id = categories.id 
+        LEFT JOIN category ON documents.category_id = category.id 
         LEFT JOIN act_types ON documents.act_type_id = act_types.id 
         LEFT JOIN instance_type ON documents.instance_type = instance_type.id
         ORDER BY documents.act_date DESC";
@@ -25,7 +25,7 @@ $stmt->execute();
 $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Récupérer les catégories pour le formulaire de recherche
-$categories_stmt = $conn->prepare("SELECT * FROM categories");
+$categories_stmt = $conn->prepare("SELECT * FROM category");
 $categories_stmt->execute();
 $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>

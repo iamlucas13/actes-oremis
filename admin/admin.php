@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['instance_type'])) {
 // Gestion des catégories
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['category'])) {
     $category = $_POST['category'];
-    $stmt = $conn->prepare("INSERT INTO categories (name) VALUES (:category)");
+    $stmt = $conn->prepare("INSERT INTO category (name) VALUES (:category)");
     $stmt->bindParam(':category', $category);
     if ($stmt->execute()) {
         echo "Nouvelle catégorie ajoutée avec succès.";
@@ -68,7 +68,7 @@ $act_types_stmt = $conn->prepare("SELECT * FROM act_types");
 $act_types_stmt->execute();
 $act_types_result = $act_types_stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$categories_stmt = $conn->prepare("SELECT * FROM categories");
+$categories_stmt = $conn->prepare("SELECT * FROM category");
 $categories_stmt->execute();
 $categories_result = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
 
