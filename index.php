@@ -39,7 +39,8 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>OREMIS Actes administratifs</title>
     <!-- Inclure Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link href="css/style.css" rel="stylesheet">
     <!-- Inclure jQuery et Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -77,8 +78,8 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <?php include ('header.php') ?>
-    <div class="container-fluid">
-        <div class="container-fluid mt-5">
+    <div class="container-custom">
+        <div class="container-custom mt-5">
             <div class="row">
                 <div class="col-md-2">
                     <img src="assets/oremis-logo.svg" alt="OREMIS Logo" class="img-fluid"
@@ -91,6 +92,7 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="text-right">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="session/logout" class="btn btn-secondary">Déconnexion</a>
+                    <a href="profil" class="btn btn-info">Mon profil</a>
                     <?php if ($user_role === 'admin' || $user_role === 'user'): ?>
                         <a href="admin/admin" class="btn btn-primary">Administration</a>
                         <p>Bonjour <?php echo htmlspecialchars($username); ?>, <?php echo htmlspecialchars($user_role); ?></p>
@@ -104,12 +106,13 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="search">Recherche (soon)</label>
-                        <input type="text" id="search" name="search" readonly="readonly" class="form-control" placeholder="Rechercher...">
+                        <input type="text" id="search" name="search" readonly="readonly" class="form-control"
+                            placeholder="Rechercher...">
                     </div>
                 </div>
             </form>
 
-            <table id="documents-table" class="table table-striped mt-3">
+            <table id="documents-table" class="table table-hover mt-3">
                 <thead class="thead-dark">
                     <tr>
                         <th>Nature de l'acte</th>
@@ -127,8 +130,8 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php if (!empty($documents)) { ?>
                         <?php foreach ($documents as $document) { ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($document['act_type']); ?><br><button class="toggle-btn"
-                                        data-id="<?php echo $document['id']; ?>">+</button></td>
+                                <td><button class="toggle-btn"
+                                data-id="<?php echo $document['id']; ?>">+</button><?php echo htmlspecialchars($document['act_type']); ?></td>
                                 <td><?php echo htmlspecialchars($document['title']); ?></td>
                                 <td><?php echo htmlspecialchars($document['category_name']); ?></td>
                                 <td><?php echo htmlspecialchars($document['instance_type']); ?></td>

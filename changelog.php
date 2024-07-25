@@ -44,35 +44,35 @@
 
     <!-- Changelog Content -->
     <div class="container">
-    <div class="changelog-section">
-            <h3>Version 0.4a <small class="text-muted">- 25 juillet 2024</small></h3>
-            <ul>
-                <li>Révision de la nomeclature en base de donnée</li>
-            </ul>
-        </div>
-        <div class="changelog-section">
-            <h3>Version 0.3a <small class="text-muted">- 22 juillet 2024</small></h3>
-            <ul>
-                <li>Modification de l'ordre d'affichage</li>
-                <li>Correction du code CSS</li>
-                <li>FIX du type d'instance (seul l'ID était affiché)</li>
-            </ul>
-        </div>
-        <div class="changelog-section">
-            <h3>Version 0.2a <small class="text-muted">- 21 juillet 2024</small></h3>
-            <ul>
-                <li>Ajout de permissions utilisateurs</li>
-                <li>Ajout d'un modal d'édition des utilisateurs</li>
-                <li>FIX du type d'instance</li>
-            </ul>
-        </div>
-        <div class="changelog-section">
-            <h3>Version 0.1a <small class="text-muted">- 18 juillet 2024</small></h3>
-            <ul>
-                <li>Fonctionnalités principales de gestion des documents ajoutées.</li>
-                <li>Interface utilisateur de base mise en place.</li>
-            </ul>
-        </div>
+        <?php
+        // Lire le contenu du fichier CHANGELOG.md
+        $changelog = file_get_contents('CHANGELOG.md');
+
+        // Diviser le contenu en sections par version
+        $sections = preg_split('/^## /m', $changelog, -1, PREG_SPLIT_NO_EMPTY);
+
+        // Afficher chaque section
+        foreach ($sections as $section) {
+            // Extraire le titre de la version
+            if (preg_match('/^(.*?)(\r?\n)+/', $section, $matches)) {
+                $versionTitle = $matches[1];
+                $sectionContent = str_replace($matches[0], '', $section);
+
+                echo '<div class="changelog-section">';
+                echo '<h3>' . htmlspecialchars($versionTitle) . '</h3>';
+                echo '<ul>';
+
+                // Diviser le contenu de la section en éléments de liste
+                $items = preg_split('/^- /m', $sectionContent, -1, PREG_SPLIT_NO_EMPTY);
+                foreach ($items as $item) {
+                    echo '<li>' . htmlspecialchars(trim($item)) . '</li>';
+                }
+
+                echo '</ul>';
+                echo '</div>';
+            }
+        }
+        ?>
     </div>
 
     <?php include 'footer.php'; ?>

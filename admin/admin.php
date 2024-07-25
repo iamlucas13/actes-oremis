@@ -95,21 +95,25 @@ $users_result = $users_stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-    <?php include('../header.php') ?>
+    <?php include ('../header.php') ?>
     <div class="container mt-5">
         <h1>Panneau d'administration</h1>
         <ul class="nav nav-tabs" id="adminTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="act-types-tab" data-toggle="tab" href="#act-types" role="tab" aria-controls="act-types" aria-selected="true">Types d'actes</a>
+                <a class="nav-link active" id="act-types-tab" data-toggle="tab" href="#act-types" role="tab"
+                    aria-controls="act-types" aria-selected="true">Types d'actes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="categories-tab" data-toggle="tab" href="#categories" role="tab" aria-controls="categories" aria-selected="false">Catégories</a>
+                <a class="nav-link" id="categories-tab" data-toggle="tab" href="#categories" role="tab"
+                    aria-controls="categories" aria-selected="false">Catégories</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" id="categories-tab" data-toggle="tab" href="#instance_type" role="tab" aria-controls="instance_type" aria-selected="false">Type d'instance (soon)</a>
+                <a class="nav-link disabled" id="categories-tab" data-toggle="tab" href="#instance_type" role="tab"
+                    aria-controls="instance_type" aria-selected="false">Type d'instance (soon)</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="false">Utilisateurs</a>
+                <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users"
+                    aria-selected="false">Utilisateurs</a>
             </li>
         </ul>
         <div class="tab-content" id="adminTabContent">
@@ -186,10 +190,14 @@ $users_result = $users_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tbody>
                         <?php foreach ($users_result as $row) { ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($row['username']); ?> (<?php echo htmlspecialchars($row['role']); ?>)</td>
+                                <td><?php echo htmlspecialchars($row['username']); ?>
+                                    (<?php echo htmlspecialchars($row['role']); ?>)</td>
                                 <?php if ($user_role === 'admin') { ?>
                                     <td>
-                                        <button class="btn btn-primary edit-user-btn" data-toggle="modal" data-target="#editUserModal" data-id="<?php echo $row['id']; ?>" data-username="<?php echo htmlspecialchars($row['username']); ?>" data-role="<?php echo htmlspecialchars($row['role']); ?>">
+                                        <button class="btn btn-primary edit-user-btn" data-toggle="modal"
+                                            data-target="#editUserModal" data-id="<?php echo $row['id']; ?>"
+                                            data-username="<?php echo htmlspecialchars($row['username']); ?>"
+                                            data-role="<?php echo htmlspecialchars($row['role']); ?>">
                                             Modifier
                                         </button>
                                     </td>
@@ -203,7 +211,8 @@ $users_result = $users_stmt->fetchAll(PDO::FETCH_ASSOC);
         <a href="../index" class="btn btn-secondary mt-3">Retour</a>
     </div>
     <!-- Modal pour l'édition des utilisateurs -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
