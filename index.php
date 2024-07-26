@@ -41,10 +41,19 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
     <link href="css/style.css" rel="stylesheet">
     <!-- Inclure jQuery et Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Data table script -->
+    <link rel = "stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+<script src = "https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js">
+</script>
+<script src = "https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js">
+</script>
+
+
     <script>
         // Toggle description
         $(document).on('click', '.toggle-btn', function () {
@@ -72,6 +81,10 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                 });
             });
         }); */
+
+$(document).ready(function() {
+$('#documents-table').DataTable();
+} );
 
     </script>
 </head>
@@ -112,6 +125,22 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </form>
 
+            <table id="daTable" class="table table-bordered" >
+<thead>
+<tr>
+<th>Name</th>
+<th>position</th>
+<th>Place</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>emma thor</td>
+<td>writer</td>
+<td>NYK</td>
+</tr>
+</table>
+
             <table id="documents-table" class="table table-hover mt-3">
                 <thead class="thead-dark">
                     <tr>
@@ -131,7 +160,8 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php foreach ($documents as $document) { ?>
                             <tr>
                                 <td><button class="toggle-btn"
-                                data-id="<?php echo $document['id']; ?>">+</button><?php echo htmlspecialchars($document['act_type']); ?></td>
+                                        data-id="<?php echo $document['id']; ?>">+</button><?php echo htmlspecialchars($document['act_type']); ?>
+                                </td>
                                 <td><?php echo htmlspecialchars($document['title']); ?></td>
                                 <td><?php echo htmlspecialchars($document['category_name']); ?></td>
                                 <td><?php echo htmlspecialchars($document['instance_type']); ?></td>
@@ -194,6 +224,7 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <?php include 'footer.php' ?>
 </body>
+
 
 </html>
 <?php

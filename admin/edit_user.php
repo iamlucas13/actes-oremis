@@ -30,4 +30,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Erreur: " . $stmt->errorInfo()[2];
     }
 }
+
 ?>
