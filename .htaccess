@@ -1,4 +1,14 @@
 RewriteEngine On
- 
+
+# Rediriger les requêtes de type /api/acts/1 vers api/api.php en passant l'ID comme paramètre
+RewriteRule ^api/acts/([0-9]+)$ api/api.php?id=$1 [QSA,L]
+
+# Rediriger les requêtes de type /api/acts vers api/api.php pour récupérer tous les actes
+RewriteRule ^api/acts$ api/api.php [QSA,L]
+
+# Si le fichier ou le dossier n'existe pas, rediriger vers index.php
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Ajouter .php à la fin des fichiers sans extension
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
