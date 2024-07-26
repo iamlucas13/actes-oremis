@@ -2,17 +2,6 @@
 session_start();
 include 'db.php';
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$uri_segments = explode('/', trim($uri, '/'));
-
-// Inclure le fichier de l'API si l'URI correspond à une requête API
-if (isset($uri_segments[0]) && $uri_segments[0] == 'api') {
-    include_once 'api/api.php';
-    exit(); // Terminer le script après le traitement de l'API
-}
-
-// Le reste de votre code index.php...
-
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $stmt = $conn->prepare("SELECT role, username FROM users WHERE id = :id");
