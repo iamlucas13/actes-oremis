@@ -1,5 +1,5 @@
 <p align="center">
-<a href="#"><img src="https://img.shields.io/badge/Last%version-0.6b-brightgreen" alt="Last version"></a>
+<a href="#"><img src="https://img.shields.io/badge/Last_version-0.6b-brightgreen" alt="Last version"></a>
 <a href="#"><img src="https://img.shields.io/badge/NPO-OREMIS-blue" alt="NPO"></a>
 </p>
 
