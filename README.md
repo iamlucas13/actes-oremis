@@ -1,37 +1,31 @@
-<p align="center"><a href="#" target="_blank"><img src="https://your-logo-link-here" width="400" alt="Actes OREMIS Logo"></a></p>
-
 <p align="center">
-<a href="#"><img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build Status"></a>
+<a href="#"><img src="https://img.shields.io/badge/build-test-brightgreen" alt="Build Status"></a>
 <a href="#"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License"></a>
 </p>
 
-## About Actes OREMIS
+# Actes OREMIS
 
-Actes OREMIS is a sleek and secure web application designed for the OREMIS non-profit organization. It provides a comprehensive platform for managing and publishing administrative acts while ensuring confidentiality where needed. The application features automatic Discord notifications, user management, and essential CRUD operations, making it an indispensable tool for managing the organization's documentation needs.
+**A sleek web application to securely publish and manage administrative acts for the OREMIS NPO.**
 
-### Key Features
+Welcome to the repository for Actes OREMIS, a specialized application designed to facilitate the secure publication of administrative acts for the OREMIS non-profit organization. This platform not only ensures that all necessary documentation is made publicly available but also incorporates essential features to maintain confidentiality and streamline user management.
 
-- **Secure Publication of Administrative Acts**: Safeguard sensitive documents with confidentiality settings.
-- **Discord Notifications**: Send real-time notifications to your Discord server upon publishing new acts.
-- **CRUD Operations**: Effortlessly manage your documents with Create, Read, Update, and Delete functionalities.
-- **User Management**: Control access and manage users efficiently.
+## ✨ Features
 
-## Changelog
+- **Secure Publication of Administrative Acts**: Publish acts with the ability to mark certain documents as confidential, ensuring sensitive information remains protected.
+- **Discord Notifications**: Automatically send notifications to your Discord server whenever new acts are published.
+- **CRUD Operations**: Seamless Create, Read, Update, and Delete operations for managing your documents and related data.
+- **User Management**: Robust user management system allowing administrators to control access levels and maintain the integrity of the platform.
 
-Stay updated with all the changes and improvements by viewing the full changelog [here](./CHANGELOG.md).
+## 📋 Changelog
 
-## Contributing
-
-We welcome contributions to Actes OREMIS! If you have any ideas, issues, or improvements, feel free to submit a pull request or open an issue. Your contributions help us improve and evolve the application.
-
-## Code of Conduct
-
-Please review and adhere to our [Code of Conduct](#) to ensure a positive environment for everyone involved.
-
-## License
-
-Actes OREMIS is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Stay up to date with all the changes and improvements by viewing the full changelog [here](./CHANGELOG.md).
 
 ---
 
-<p align="center">Thank you for using Actes OREMIS. We appreciate your support and contributions!</p>
+Thank you for choosing Actes OREMIS for your document management needs. We are committed to providing a secure and user-friendly experience for all our users.
+
+For any issues or contributions, feel free to open an issue or submit a pull request. We appreciate your feedback and contributions!
+
+---
+
+© 2024 OREMIS NPO - All rights reserved.
