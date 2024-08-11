@@ -1,3 +1,6 @@
+## Version 0.6a - 11 août 2024
+- Possibilité ou non d'envoyer la notification discord.
+
 ## Version 0.5a - 11 août 2024
 - Ajout d'un webhook pour notification discord.
 - Ajout d'un système de pagination lors de la consultation de l'ensemble des actes.
