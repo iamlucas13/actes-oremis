@@ -1,3 +1,7 @@
+## Version 0.5a - 11 août 2024
+- Ajout d'un webhook pour notification discord.
+- Ajout d'un système de pagination lors de la consultation de l'ensemble des actes.
+
 ## Version 0.4a - 25 juillet 2024
 - Révision de la nomenclature en base de données
 - L'utilisateur peut maintenant modifier son mot de passe dans "mon profil"
