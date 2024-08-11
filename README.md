@@ -22,9 +22,7 @@ Stay up to date with all the changes and improvements by viewing the full change
 
 ---
 
-Thank you for choosing Actes OREMIS for your document management needs. We are committed to providing a secure and user-friendly experience for all our users.
-
-For any issues or contributions, feel free to open an issue or submit a pull request. We appreciate your feedback and contributions!
+Internal use only for the moment.
 
 ---
 
