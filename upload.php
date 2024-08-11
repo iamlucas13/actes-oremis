@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Le fichier est trop volumineux. La taille maximale est de 10 MB.";
     } elseif (move_uploaded_file($_FILES['file']['tmp_name'], $target_file)) {
         // Utiliser une requête préparée pour éviter les injections SQL
-        $stmt = $conn->prepare("INSERT INTO documents (title, description, category_id, act_type_id, instance_type, act_date, filename) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$title, $description, $category_id, $act_type_id, $instance_type_id, $act_date, $unique_name]);
+        $stmt = $conn->prepare("INSERT INTO documents (title, description, category_id, act_type_id, instance_type, act_date, filename, confidential) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$title, $description, $category_id, $act_type_id, $instance_type_id, $act_date, $unique_name, isset($_POST['confidential']) ? 1 : 0]);
         if ($stmt->rowCount()) {
             echo "Le document a été téléchargé avec succès.";
 
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $act_type_name = $stmtActType->fetchColumn();
 
             // Vérifier si l'utilisateur souhaite envoyer une notification
-            if (isset($_POST['send_notification']) && $_POST['send_notification'] == '1') {
+            if (isset($_POST['send_notification']) && $_POST['send_notification'] == '1' && !isset($_POST['confidential'])) {
                 // URL du Webhook Discord
                 $webhookUrl = "https://discord.com/api/webhooks/1272097374315221013/oyMhSIV23Lv46WEc0kzNTCZoisXP-sgz_17YHhq_o4jWOVL6LpZv6GkEK3laFTs7GbAb";
 
@@ -81,26 +81,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ":link: **L'ensemble des actes sont disponible ici :** [actes.oremis.fr](https://actes.oremis.fr)\n" .
                     "-----------------------------------\n\n";
 
-                    function sendDiscordNotification($webhookUrl, $message)
-                    {
-                        $json_data = json_encode([
-                            "content" => $message
-                        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        
-                        $ch = curl_init($webhookUrl);
-                        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-                        curl_setopt($ch, CURLOPT_POST, 1);
-                        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
-                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-                        curl_setopt($ch, CURLOPT_HEADER, 0);
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        
-                        $response = curl_exec($ch);
-                        curl_close($ch);
-        
-                        return $response;
-                    }
-        
+                function sendDiscordNotification($webhookUrl, $message)
+                {
+                    $json_data = json_encode([
+                        "content" => $message
+                    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+                    $ch = curl_init($webhookUrl);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+                    curl_setopt($ch, CURLOPT_POST, 1);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                    curl_setopt($ch, CURLOPT_HEADER, 0);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+                    $response = curl_exec($ch);
+                    curl_close($ch);
+
+                    return $response;
+                }
+
 
                 // Envoi de la notification
                 sendDiscordNotification($webhookUrl, $message);
@@ -156,6 +156,22 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
                     e.preventDefault(); // Empêche l'envoi du formulaire si l'utilisateur clique sur Annuler
                 }
             });
+
+            // Cacher le bouton de notification si l'acte est confidentiel
+            $('#confidential').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#send_notification_container').hide();
+                } else {
+                    $('#send_notification_container').show();
+                }
+            });
+
+            // Initialisation de l'état au chargement de la page
+            if ($('#confidential').is(':checked')) {
+                $('#send_notification_container').hide();
+            } else {
+                $('#send_notification_container').show();
+            }
         });
     </script>
 </head>
@@ -206,6 +222,10 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
                 <input type="file" name="file" id="file" class="form-control-file" accept="application/pdf" required>
             </div>
             <div class="form-group">
+                <input type="checkbox" name="confidential" id="confidential" value="1">
+                <label for="confidential">Acte confidentiel</label>
+            </div>
+            <div class="form-group" id="send_notification_container">
                 <input type="checkbox" name="send_notification" id="send_notification" value="1">
                 <label for="send_notification">Envoyer une notification Discord</label>
             </div>

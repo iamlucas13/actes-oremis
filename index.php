@@ -16,7 +16,7 @@ if (isset($_SESSION['user_id'])) {
 
 // Pagination
 $limit = 10; // Nombre de documents par page
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $start = ($page > 1) ? ($page * $limit) - $limit : 0;
 
 // Récupérer le nombre total de documents
@@ -55,7 +55,8 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>OREMIS Actes administratifs</title>
     <!-- Inclure Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <link href="css/style.css" rel="stylesheet">
     <!-- Inclure jQuery et Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -97,7 +98,8 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="container-custom mt-5">
             <div class="row">
                 <div class="col-md-2">
-                    <img src="assets/oremis-logo.svg" alt="OREMIS Logo" class="img-fluid" style="max-height: 60px; width: auto;">
+                    <img src="assets/oremis-logo.svg" alt="OREMIS Logo" class="img-fluid"
+                        style="max-height: 60px; width: auto;">
                 </div>
                 <div class="col-md-8 text-center">
                     <h1>Actes administratifs de l'association OREMIS</h1>
@@ -143,17 +145,28 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                 <tbody>
                     <?php if (!empty($documents)) { ?>
                         <?php foreach ($documents as $document) { ?>
+                            <?php if ($document['confidential'] && !isset($_SESSION['user_id']))
+                                continue; ?>
                             <tr>
-                                <td><button class="toggle-btn" data-id="<?php echo $document['id']; ?>">+</button><?php echo htmlspecialchars($document['act_type']); ?></td>
+                                <td>
+                                    <button class="toggle-btn" data-id="<?php echo $document['id']; ?>">+</button>
+                                    <span style="<?php echo $document['confidential'] ? 'color: red;' : ''; ?>">
+                                        <?php echo htmlspecialchars($document['act_type']); ?>
+                                    </span>
+                                </td>
                                 <td><?php echo htmlspecialchars($document['title']); ?></td>
                                 <td><?php echo htmlspecialchars($document['category_name']); ?></td>
                                 <td><?php echo htmlspecialchars($document['instance_type']); ?></td>
                                 <td><?php echo htmlspecialchars($document['act_date']); ?></td>
-                                <td><button class="view-btn btn btn-info btn-sm mt-1" data-toggle="modal" data-target="#pdfModal" data-filename="uploads/<?php echo htmlspecialchars($document['filename']); ?>">Visualiser</button></td>
+                                <td><button class="view-btn btn btn-info btn-sm mt-1" data-toggle="modal"
+                                        data-target="#pdfModal"
+                                        data-filename="uploads/<?php echo htmlspecialchars($document['filename']); ?>">Visualiser</button>
+                                </td>
                                 <?php if (isset($_SESSION['user_id'])): ?>
                                     <?php if ($user_role === 'admin') { ?>
                                         <td><a href="edit?id=<?php echo $document['id']; ?>" class="btn btn-warning btn-sm">Modifier</a>
-                                            <a href="delete?id=<?php echo $document['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce document?');">Supprimer</a>
+                                            <a href="delete?id=<?php echo $document['id']; ?>" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce document?');">Supprimer</a>
                                         </td>
                                     <?php } else { ?>
                                         <td><a href="edit?id=<?php echo $document['id']; ?>" class="btn btn-warning btn-sm">Modifier</a>
@@ -162,7 +175,8 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <?php endif; ?>
                             </tr>
                             <tr class="description" id="description-<?php echo $document['id']; ?>" style="display: none;">
-                                <td colspan="7"><?php echo htmlspecialchars($document['description']); ?> <br> Réf. <?php echo htmlspecialchars($document['title']); ?></td>
+                                <td colspan="7"><?php echo htmlspecialchars($document['description']); ?> <br> Réf.
+                                    <?php echo htmlspecialchars($document['title']); ?></td>
                             </tr>
                         <?php } ?>
                     <?php } else { ?>
@@ -181,7 +195,8 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php endif; ?>
 
                     <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                        <li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+                        <li class="page-item <?php if ($i == $page)
+                            echo 'active'; ?>">
                             <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
                         </li>
                     <?php endfor; ?>
@@ -198,7 +213,8 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <!-- Modale pour visualiser le PDF -->
-        <div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+        <div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

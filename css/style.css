@@ -70,3 +70,6 @@ label, input, select, button {
     width: 90%;
   }
 
+  .confidential {
+    color: red;
+}

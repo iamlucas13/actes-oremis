@@ -1,3 +1,7 @@
+## Version 0.6b - 11 août 2024
+- Création d'actes confidentiels visible uniquement par les utilisateurs connectés.
+- Blocage de la notification discord en cas d'actes confidentiels. 
+
 ## Version 0.6a - 11 août 2024
 - Possibilité ou non d'envoyer la notification discord.
 
