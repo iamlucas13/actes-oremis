@@ -62,46 +62,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmtActType->execute([$act_type_id]);
             $act_type_name = $stmtActType->fetchColumn();
 
-            // URL du Webhook Discord
-            $webhookUrl = "https://discord.com/api/webhooks/1272097374315221013/oyMhSIV23Lv46WEc0kzNTCZoisXP-sgz_17YHhq_o4jWOVL6LpZv6GkEK3laFTs7GbAb";
+            // Vérifier si l'utilisateur souhaite envoyer une notification
+            if (isset($_POST['send_notification']) && $_POST['send_notification'] == '1') {
+                // URL du Webhook Discord
+                $webhookUrl = "https://discord.com/api/webhooks/1272097374315221013/oyMhSIV23Lv46WEc0kzNTCZoisXP-sgz_17YHhq_o4jWOVL6LpZv6GkEK3laFTs7GbAb";
 
-            // Mise en forme de la date
-            $formatted_date = DateTime::createFromFormat('Y-m-d', $act_date)->format('d/m/Y');
+                // Mise en forme de la date
+                $formatted_date = DateTime::createFromFormat('Y-m-d', $act_date)->format('d/m/Y');
 
-            // Message à envoyer sur Discord
-            $message = ":scroll: **- OREMIS -** _Un nouvel acte administratif a été publié_ :scroll:\n\n" .
-                "-----------------------------------\n" .
-                ":label: **Identifiant de l'acte :** " . html_entity_decode($title, ENT_QUOTES, 'UTF-8') . "\n" .
-                ":page_facing_up: **Type d'acte :** " . htmlspecialchars($act_type_name, ENT_QUOTES, 'UTF-8') . "\n" .
-                ":file_folder: **Catégorie :** " . htmlspecialchars($category_name, ENT_QUOTES, 'UTF-8') . "\n" .
-                ":pencil: **Description :** " . html_entity_decode($description, ENT_QUOTES, 'UTF-8') . "\n" .
-                ":calendar: **Date de l'acte :** " . htmlspecialchars($formatted_date, ENT_QUOTES, 'UTF-8') . "\n \n" .
-                ":link: **L'ensemble des actes sont disponible ici :** [actes.oremis.fr](https://actes.oremis.fr)\n" .
-                "-----------------------------------\n\n";
+                // Message à envoyer sur Discord
+                $message = ":scroll: **- OREMIS -** _Un nouvel acte administratif a été publié_ :scroll:\n\n" .
+                    "-----------------------------------\n" .
+                    ":label: **Identifiant de l'acte :** " . html_entity_decode($title, ENT_QUOTES, 'UTF-8') . "\n" .
+                    ":page_facing_up: **Type d'acte :** " . htmlspecialchars($act_type_name, ENT_QUOTES, 'UTF-8') . "\n" .
+                    ":file_folder: **Catégorie :** " . htmlspecialchars($category_name, ENT_QUOTES, 'UTF-8') . "\n" .
+                    ":pencil: **Description :** " . html_entity_decode($description, ENT_QUOTES, 'UTF-8') . "\n" .
+                    ":calendar: **Date de l'acte :** " . htmlspecialchars($formatted_date, ENT_QUOTES, 'UTF-8') . "\n \n" .
+                    ":link: **L'ensemble des actes sont disponible ici :** [actes.oremis.fr](https://actes.oremis.fr)\n" .
+                    "-----------------------------------\n\n";
 
+                    function sendDiscordNotification($webhookUrl, $message)
+                    {
+                        $json_data = json_encode([
+                            "content" => $message
+                        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        
+                        $ch = curl_init($webhookUrl);
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+                        curl_setopt($ch, CURLOPT_POST, 1);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                        curl_setopt($ch, CURLOPT_HEADER, 0);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        
+                        $response = curl_exec($ch);
+                        curl_close($ch);
+        
+                        return $response;
+                    }
+        
 
-            function sendDiscordNotification($webhookUrl, $message)
-            {
-                $json_data = json_encode([
-                    "content" => $message
-                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-
-                $ch = curl_init($webhookUrl);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-                curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-                $response = curl_exec($ch);
-                curl_close($ch);
-
-                return $response;
+                // Envoi de la notification
+                sendDiscordNotification($webhookUrl, $message);
             }
-
-            // Envoi de la notification
-            sendDiscordNotification($webhookUrl, $message);
 
         } else {
             echo "Erreur lors de l'insertion du document.";
@@ -146,13 +149,13 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
                 $('#instance_type_container').show();
             }
 
-        // Ajouter une confirmation avant l'envoi du formulaire
-        $('form').on('submit', function (e) {
-            var confirmation = confirm("Une fois publié, aucun élément légal ne peut être édité. Voulez-vous continuer ?");
-            if (!confirmation) {
-                e.preventDefault(); // Empêche l'envoi du formulaire si l'utilisateur clique sur Annuler
-            }
-        });
+            // Ajouter une confirmation avant l'envoi du formulaire
+            $('form').on('submit', function (e) {
+                var confirmation = confirm("Une fois publié, aucun élément légal ne peut être édité. Voulez-vous continuer ?");
+                if (!confirmation) {
+                    e.preventDefault(); // Empêche l'envoi du formulaire si l'utilisateur clique sur Annuler
+                }
+            });
         });
     </script>
 </head>
@@ -202,7 +205,11 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
                 <label for="file">Fichier PDF:</label>
                 <input type="file" name="file" id="file" class="form-control-file" accept="application/pdf" required>
             </div>
-            <button type="submit" class="btn btn-primary">Télécharger</button>
+            <div class="form-group">
+                <input type="checkbox" name="send_notification" id="send_notification" value="1">
+                <label for="send_notification">Envoyer une notification Discord</label>
+            </div>
+            <button type="submit" class="btn btn-danger">Publier l'acte administratif</button>
         </form>
         <a href="index" class="btn btn-secondary mt-3">Retour à la liste des documents</a>
     </div>

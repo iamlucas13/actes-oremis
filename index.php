@@ -15,7 +15,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 // Pagination
-$limit = 5; // Nombre de documents par page
+$limit = 10; // Nombre de documents par page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start = ($page > 1) ? ($page * $limit) - $limit : 0;
 
@@ -149,8 +149,7 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <td><?php echo htmlspecialchars($document['category_name']); ?></td>
                                 <td><?php echo htmlspecialchars($document['instance_type']); ?></td>
                                 <td><?php echo htmlspecialchars($document['act_date']); ?></td>
-                                <td><a href="uploads/<?php echo htmlspecialchars($document['filename']); ?>" target="_blank">Télécharger</a><br><button class="view-btn btn btn-info btn-sm mt-1" data-toggle="modal" data-target="#pdfModal" data-filename="uploads/<?php echo htmlspecialchars($document['filename']); ?>">Visualiser</button>
-                                </td>
+                                <td><button class="view-btn btn btn-info btn-sm mt-1" data-toggle="modal" data-target="#pdfModal" data-filename="uploads/<?php echo htmlspecialchars($document['filename']); ?>">Visualiser</button></td>
                                 <?php if (isset($_SESSION['user_id'])): ?>
                                     <?php if ($user_role === 'admin') { ?>
                                         <td><a href="edit?id=<?php echo $document['id']; ?>" class="btn btn-warning btn-sm">Modifier</a>
