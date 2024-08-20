@@ -2,13 +2,14 @@
 session_start();
 require_once '../vendor/autoload.php';
 include '../db.php';
+require_once __DIR__ . '/../env.php';
 
 use Google\Service\Oauth2;
 
 $client = new Google_Client();
-$client->setClientId('469603402058-seka5codogk226poc0akq2q3k1vmu84o.apps.googleusercontent.com');
-$client->setClientSecret('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');
-$client->setRedirectUri('http://localhost/session/callback.php');
+$client->setClientId(GOOGLE_CLIENT_ID);
+$client->setClientSecret(GOOGLE_CLIENT_SECRET);
+$client->setRedirectUri(REDIRECT_URI);
 $client->addScope('email');
 
 if (isset($_GET['code'])) {

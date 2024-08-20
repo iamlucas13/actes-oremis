@@ -1,3 +1,6 @@
+## Version 0.8b - 20 août 2024
+- Ajout des variables d'environnements.
+
 ## Version 0.7b - 20 août 2024
 - Ajout de l'authentification avec google.
 

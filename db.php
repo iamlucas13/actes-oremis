@@ -1,8 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "oremis";
+
+require_once __DIR__ . '/env.php';
+
+$servername = DB_HOST;
+$username = DB_USER;
+$password = DB_PASS;
+$dbname = DB_NAME;
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

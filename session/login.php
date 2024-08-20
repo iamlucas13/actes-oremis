@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="container mt-5">
         <h1>Connexion</h1>
-        <form action="login.php" method="post">
+        <!-- <form action="login.php" method="post">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur:</label>
                 <input type="text" name="username" id="username" class="form-control" required>
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">Se connecter</button>
-        </form>
+        </form> -->
         <hr>
         <a href="google_login.php" class="btn btn-danger">Se connecter avec Google</a>
     </div>
