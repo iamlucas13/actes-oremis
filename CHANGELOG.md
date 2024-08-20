@@ -1,3 +1,6 @@
+## Version 0.7b - 20 août 2024
+- Ajout de l'authentification avec google.
+
 ## Version 0.6b - 11 août 2024
 - Création d'actes confidentiels visible uniquement par les utilisateurs connectés.
 - Blocage de la notification discord en cas d'actes confidentiels. 
