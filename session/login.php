@@ -32,28 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <title>Connexion</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <meta name="google-signin-client_id" content="442575193619-ss1ahop1o7eoca88ov1t8e1anktaptqu.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            var email = profile.getEmail();
-            var id_token = googleUser.getAuthResponse().id_token;
-
-            // Envoyer l'email et le token au serveur pour vérification
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'verify_google_login.php');
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-                if (xhr.responseText === 'success') {
-                    window.location.href = '../index.php';
-                } else {
-                    alert('Échec de la connexion Google.');
-                }
-            };
-            xhr.send('email=' + encodeURIComponent(email) + '&id_token=' + encodeURIComponent(id_token));
-        }
-    </script>
 </head>
 <body>
     <div class="container mt-5">
@@ -69,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <button type="submit" class="btn btn-primary">Se connecter</button>
         </form>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <hr>
+        <a href="google_login.php" class="btn btn-danger">Se connecter avec Google</a>
     </div>
 </body>
 </html>
