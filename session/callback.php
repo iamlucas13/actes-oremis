@@ -3,7 +3,7 @@ session_start();
 require_once '../vendor/autoload.php';
 include '../db.php';
 
-use Google_Service_Oauth2;
+use Google\Service\Oauth2;
 
 $client = new Google_Client();
 $client->setClientId('469603402058-seka5codogk226poc0akq2q3k1vmu84o.apps.googleusercontent.com');
@@ -22,7 +22,7 @@ if (isset($_GET['code'])) {
 
     // Récupérer les informations de l'utilisateur
     
-    $oauth2 = new Google_Service_Oauth2($client);
+    $oauth2 = new Oauth2($client);
     $userInfo = $oauth2->userinfo->get();
 
     $email = $userInfo->email;
