@@ -5,6 +5,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+require_once __DIR__ . '/env.php';
 include 'db.php';
 
 // Générer un token CSRF
@@ -65,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Vérifier si l'utilisateur souhaite envoyer une notification
             if (isset($_POST['send_notification']) && $_POST['send_notification'] == '1' && !isset($_POST['confidential'])) {
                 // URL du Webhook Discord
-                $webhookUrl = "https://discord.com/api/webhooks/1272097374315221013/oyMhSIV23Lv46WEc0kzNTCZoisXP-sgz_17YHhq_o4jWOVL6LpZv6GkEK3laFTs7GbAb";
+                $webhookUrl = WEBHOOK_URL;
 
                 // Mise en forme de la date
                 $formatted_date = DateTime::createFromFormat('Y-m-d', $act_date)->format('d/m/Y');
@@ -78,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ":file_folder: **Catégorie :** " . htmlspecialchars($category_name, ENT_QUOTES, 'UTF-8') . "\n" .
                     ":pencil: **Description :** " . html_entity_decode($description, ENT_QUOTES, 'UTF-8') . "\n" .
                     ":calendar: **Date de l'acte :** " . htmlspecialchars($formatted_date, ENT_QUOTES, 'UTF-8') . "\n \n" .
-                    ":link: **L'ensemble des actes sont disponible ici :** [actes.oremis.fr](https://actes.oremis.fr)\n" .
+                    ":link: **L'ensemble des actes sont disponible ici :** [Cliquez ici](" . WEBHOOK_WEBSITE_LINK . ")\n" .
                     "-----------------------------------\n\n";
 
                 function sendDiscordNotification($webhookUrl, $message)
@@ -105,7 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Envoi de la notification
                 sendDiscordNotification($webhookUrl, $message);
             }
-
         } else {
             echo "Erreur lors de l'insertion du document.";
         }
@@ -130,12 +130,12 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Masquer le conteneur de type d'instance au chargement de la page
             $('#instance_type_container').hide();
 
             // Gestion de l'affichage en fonction du type d'acte sélectionné
-            $('#act_type').change(function () {
+            $('#act_type').change(function() {
                 var selectedText = $('#act_type').find('option:selected').text().toLowerCase();
                 if (selectedText === 'procès verbal' || selectedText === 'délibération') {
                     $('#instance_type_container').show();
@@ -150,7 +150,7 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
             }
 
             // Ajouter une confirmation avant l'envoi du formulaire
-            $('form').on('submit', function (e) {
+            $('form').on('submit', function(e) {
                 var confirmation = confirm("Une fois publié, aucun élément légal ne peut être édité. Voulez-vous continuer ?");
                 if (!confirmation) {
                     e.preventDefault(); // Empêche l'envoi du formulaire si l'utilisateur clique sur Annuler
@@ -158,7 +158,7 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
             });
 
             // Cacher le bouton de notification si l'acte est confidentiel
-            $('#confidential').change(function () {
+            $('#confidential').change(function() {
                 if ($(this).is(':checked')) {
                     $('#send_notification_container').hide();
                 } else {

@@ -12,3 +12,8 @@ define('DB_NAME', '');
 define('GOOGLE_CLIENT_ID', '');
 define('GOOGLE_CLIENT_SECRET', '');
 define('REDIRECT_URI', '');
+
+// WEBHOOK
+
+define('WEBHOOK_URL', '');
+define('WEBHOOK_WEBSITE_LINK', '');
