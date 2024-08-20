@@ -175,7 +175,6 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
         });
     </script>
 </head>
-
 <body>
     <div class="container mt-5">
         <h1>Ajouter un document</h1>
@@ -205,14 +204,15 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
                     <?php } ?>
                 </select>
             </div>
-            <div class="form-group" id="instance_type_container">
+            <div class="form-group">
                 <label for="instance_type">Type d'instance:</label>
-                <select name="instance_type" id="instance_type" class="form-control" required>
+                <select name="instance_type" id="instance_type" class="form-control">
                     <?php while ($row = $instance_type_result->fetch(PDO::FETCH_ASSOC)) { ?>
                         <option value="<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['name']); ?></option>
                     <?php } ?>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="act_date">Date de l'acte:</label>
                 <input type="date" name="act_date" id="act_date" class="form-control" required>

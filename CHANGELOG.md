@@ -1,3 +1,6 @@
+## Version 0.9a - 20 août 2024
+- FIX: Type d'instance.
+
 ## Version 0.8b - 20 août 2024
 - Ajout des variables d'environnements.
 

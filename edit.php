@@ -118,7 +118,7 @@ $instance_type_result = $instance_type_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php } ?>
                 </select>
             </div>
-            <div class="form-group" id="instance_type_container">
+            <div class="form-group">
                 <label for="instance_type">Type d'instance:</label>
                 <select name="instance_type" id="instance_type" class="form-control" required>
                     <?php foreach ($instance_type_result as $row) { ?>
