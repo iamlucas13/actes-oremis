@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'e7b3bdc42c4ea4cb9b0e5c4ac706fca777687bfa',
+        'reference' => 'dfc3f7f1e04553d22a72f70c43c4b10a477452c2',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'e7b3bdc42c4ea4cb9b0e5c4ac706fca777687bfa',
+            'reference' => 'dfc3f7f1e04553d22a72f70c43c4b10a477452c2',
             'dev_requirement' => false,
         ),
         'firebase/php-jwt' => array(
@@ -107,6 +107,15 @@
             'install_path' => __DIR__ . '/../paragonie/random_compat',
             'aliases' => array(),
             'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
+            'dev_requirement' => false,
+        ),
+        'phpseclib/phpseclib' => array(
+            'pretty_version' => '3.0.41',
+            'version' => '3.0.41.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpseclib/phpseclib',
+            'aliases' => array(),
+            'reference' => '621c73f7dcb310b61de34d1da4c4204e8ace6ceb',
             'dev_requirement' => false,
         ),
         'psr/cache' => array(
