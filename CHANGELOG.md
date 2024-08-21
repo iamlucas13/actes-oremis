@@ -1,3 +1,6 @@
+## Version 1.1a beta - 21 août 2024
+- 🔄 Révision de la modal d'édition des utilisateurs.
+
 ## Version 1.0 - 21 août 2024 - Version majeure
 - ➕ Ajout de la création des instances.
 - ➕ Ajout de la modification des instances.

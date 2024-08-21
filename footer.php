@@ -13,13 +13,17 @@ if (file_exists($changelog_path)) {
     $latest_version = '';
     if (!empty($sections) && preg_match('/^Version\s+(\S+)/', $sections[0], $matches)) {
         $latest_version = trim($matches[1]);
+
+        // Vérifier si "beta" est présent dans la version
+        if (preg_match('/\bbeta\b/i', $sections[0])) {
+            $latest_version .= ' (beta)';
+        }
     }
 } else {
     // Gérer le cas où le fichier CHANGELOG.md est introuvable
     $latest_version = 'N/A';
 }
 ?>
-
 
 <!-- Footer -->
 <footer class="mt-4">
