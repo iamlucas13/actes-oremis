@@ -71,8 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="btn btn-primary">Modifier</button>
         </form>
         <a href="index" class="btn btn-secondary mt-3">Retour</a>
+        <?php include('footer.php'); ?>
     </div>
-    <?php include('footer.php'); ?>
 </body>
 </html>
 <?php

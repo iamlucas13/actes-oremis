@@ -106,11 +106,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Envoi de la notification
                 sendDiscordNotification($webhookUrl, $message);
             }
+
+            header("Location: index.php?success=1&message=Le document a été téléchargé avec succès.");
+            exit;
         } else {
-            echo "Erreur lors de l'insertion du document.";
+            header("Location: index.php?success=0&message=Erreur lors de l'insertion du document.");
+            exit;
         }
     } else {
-        echo "Désolé, une erreur s'est produite lors du téléchargement de votre fichier.";
+        header("Location: index.php?success=0&message=Désolé, une erreur s'est produite lors du téléchargement de votre fichier.");
+        exit;
     }
 }
 
@@ -175,6 +180,7 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
         });
     </script>
 </head>
+
 <body>
     <div class="container mt-5">
         <h1>Ajouter un document</h1>

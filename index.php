@@ -63,7 +63,7 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         // Toggle description
-        $(document).on('click', '.toggle-btn', function () {
+        $(document).on('click', '.toggle-btn', function() {
             var id = $(this).data('id');
             $('#description-' + id).toggle();
             if ($(this).text() === '+') {
@@ -74,7 +74,7 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
         });
 
         // Show PDF in modal
-        $(document).on('click', '.view-btn', function () {
+        $(document).on('click', '.view-btn', function() {
             var filename = $(this).data('filename');
             $('#pdfModal iframe').attr('src', filename);
         });
@@ -88,12 +88,11 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                 });
             });
         }); */
-
     </script>
 </head>
 
 <body>
-    <?php include ('header.php') ?>
+    <?php include('header.php') ?>
     <div class="container-custom">
         <div class="container-custom mt-5">
             <div class="row">
@@ -105,6 +104,16 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h1>Actes administratifs de l'association OREMIS</h1>
                 </div>
             </div>
+
+            <!-- Afficher les messages de succès ou d'erreur -->
+            <?php if (isset($_GET['message'])): ?>
+                <div class="alert <?php echo $_GET['success'] == 1 ? 'alert-success' : 'alert-danger'; ?> alert-dismissible fade show" role="alert">
+                    <?php echo htmlspecialchars($_GET['message']); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
             <div class="text-right">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="session/logout" class="btn btn-secondary">Déconnexion</a>
@@ -118,7 +127,9 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
             </div>
 
-            <form method="get" action="index" class="mt-3">
+            <br><br>
+
+            <!-- <form method="get" action="index" class="mt-3">
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="search">Recherche (soon)</label>
@@ -126,7 +137,7 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                             placeholder="Rechercher...">
                     </div>
                 </div>
-            </form>
+            </form> -->
 
             <table id="documents-table" class="table table-hover mt-3">
                 <thead class="thead-dark">
@@ -196,7 +207,7 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                         <li class="page-item <?php if ($i == $page)
-                            echo 'active'; ?>">
+                                                    echo 'active'; ?>">
                             <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
                         </li>
                     <?php endfor; ?>

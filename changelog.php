@@ -35,7 +35,7 @@
 </head>
 
 <body>
-    <?php include ('header.php') ?>
+    <?php include('header.php') ?>
     <!-- Changelog Header -->
     <div class="changelog-header">
         <h1>Changelog</h1>
@@ -51,8 +51,20 @@
         // Diviser le contenu en sections par version
         $sections = preg_split('/^## /m', $changelog, -1, PREG_SPLIT_NO_EMPTY);
 
-        // Afficher chaque section
-        foreach ($sections as $section) {
+        // Nombre de versions par page
+        $versionsPerPage = 3;
+
+        // Calculer la page actuelle
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $totalVersions = count($sections);
+        $totalPages = ceil($totalVersions / $versionsPerPage);
+        $start = ($page - 1) * $versionsPerPage;
+        $end = min($start + $versionsPerPage, $totalVersions);
+
+        // Afficher les sections pour la page actuelle
+        for ($i = $start; $i < $end; $i++) {
+            $section = $sections[$i];
+
             // Extraire le titre de la version
             if (preg_match('/^(.*?)(\r?\n)+/', $section, $matches)) {
                 $versionTitle = $matches[1];
@@ -73,9 +85,30 @@
             }
         }
         ?>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <?php if ($page > 1): ?>
+                    <li class="page-item"><a class="page-link" href="?page=<?php echo $page - 1; ?>">Précédent</a></li>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+                        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+
+                <?php if ($page < $totalPages): ?>
+                    <li class="page-item"><a class="page-link" href="?page=<?php echo $page + 1; ?>">Suivant</a></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+
+        <a href="../index" class="btn btn-secondary mt-3">Retour</a> <!-- Bouton pour retourner à l'index -->
+        <?php include 'footer.php'; ?>
     </div>
 
-    <?php include 'footer.php'; ?>
 </body>
 
 </html>

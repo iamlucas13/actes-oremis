@@ -12,12 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : null;
     $role = $_POST['role'];
+    $email = $_POST['email'];
 
-    $sql = "UPDATE users SET username = :username, role = :role" . ($password ? ", password = :password" : "") . " WHERE id = :id";
+    $sql = "UPDATE users SET username = :username, role = :role, email = :email" . ($password ? ", password = :password" : "") . " WHERE id = :id";
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':role', $role);
+    $stmt->bindParam(':email', $email);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
     if ($password) {
@@ -25,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($stmt->execute()) {
+        header("Location: admin");
         echo "Les informations de l'utilisateur ont été mises à jour avec succès.";
     } else {
         echo "Erreur: " . $stmt->errorInfo()[2];
