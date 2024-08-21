@@ -1,3 +1,6 @@
+## Version 1.1b beta - 21 août 2024
+- ➕ Ajout d'une méthode d'installation initiale (beta).
+
 ## Version 1.1a beta - 21 août 2024
 - 🔄 Révision de la modal d'édition des utilisateurs.
 
