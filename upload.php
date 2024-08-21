@@ -231,10 +231,12 @@ $instance_type_result = $conn->query("SELECT * FROM instance_type");
                 <input type="checkbox" name="confidential" id="confidential" value="1">
                 <label for="confidential">Acte confidentiel</label>
             </div>
+            <?php if (defined('WEBHOOK_URL') && !empty(WEBHOOK_URL)): ?>
             <div class="form-group" id="send_notification_container">
                 <input type="checkbox" name="send_notification" id="send_notification" value="1">
                 <label for="send_notification">Envoyer une notification Discord</label>
             </div>
+            <?php endif; ?>
             <button type="submit" class="btn btn-danger">Publier l'acte administratif</button>
         </form>
         <a href="index" class="btn btn-secondary mt-3">Retour à la liste des documents</a>

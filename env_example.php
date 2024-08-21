@@ -1,5 +1,11 @@
 <?php
 
+// Organization informations
+
+define('ORG_NAME', '');
+define('ORG_EMAIL', '');
+define('ORG_WEBSITE', '');
+
 // Database connection
 
 define('DB_HOST', '');

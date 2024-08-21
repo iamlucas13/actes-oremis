@@ -52,7 +52,7 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex">
-    <title>OREMIS Actes administratifs</title>
+    <title><?php echo ORG_NAME; ?> - Actes administratifs</title>
     <!-- Inclure Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet"
@@ -101,7 +101,7 @@ $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
                         style="max-height: 60px; width: auto;">
                 </div>
                 <div class="col-md-8 text-center">
-                    <h1>Actes administratifs de l'association OREMIS</h1>
+                    <h1>Actes administratifs de l'association <?php echo ORG_NAME; ?></h1>
                 </div>
             </div>
 

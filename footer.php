@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__ . '/env.php';
+
 // Obtenir le chemin absolu vers le fichier CHANGELOG.md en utilisant __DIR__
 $changelog_path = __DIR__ . '/CHANGELOG.md';
 
@@ -30,7 +33,7 @@ if (file_exists($changelog_path)) {
     <div class="container-custom mt-5">
         <div class="row">
             <div class="col-md-6">
-                <h5 class="text-uppercase font-weight-bold">Association OREMIS</h5>
+                <h5 class="text-uppercase font-weight-bold">Association <?php echo ORG_NAME; ?></h5>
                 <ul class="list-unstyled">
                     <li><a href="changelog" class="text-dark">Changelog</a></li>
                     <li><span class="text-dark">Dernière version : <?php echo htmlspecialchars($latest_version); ?></span></li>
@@ -39,8 +42,8 @@ if (file_exists($changelog_path)) {
             <div class="col-md-6 text-md-right">
                 <h5 class="text-uppercase font-weight-bold">Contact</h5>
                 <ul class="list-unstyled">
-                    <li><a href="mailto:contact@oremis.fr" class="text-dark">contact@oremis.fr</a></li>
-                    <li><a href="https://oremis.fr" target="_blank" class="text-dark">oremis.fr</a></li>
+                    <li><a href="mailto:<?php echo ORG_EMAIL; ?>" class="text-dark"><?php echo ORG_EMAIL; ?></a></li>
+                    <li><a href="<?php echo ORG_WEBSITE; ?>" target="_blank" class="text-dark">Notre site internet</a></li>
                 </ul>
             </div>
         </div>
