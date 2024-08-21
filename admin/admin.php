@@ -240,6 +240,8 @@ try {
     </script>
 
   
+<?php include 'edit_user_modal.php'; ?> <!-- Inclut le modal Modifier l'utilisateur -->
+
 </body>
 
 </html>
